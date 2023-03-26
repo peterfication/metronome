@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
+
+import sound from './assets/tick.mp3'
+
 import "./App.css";
+
+const tickSound = new Audio(sound);
 
 function App() {
 	const [beatsPerMinute, setBeatsPerMinute] = useState(60);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			console.log("tick");
-		}, 60 / beatsPerMinute * 1000);
+			console.log(`tick ${new Date()}`);
+			tickSound.play();
+		}, (60 / beatsPerMinute) * 1000);
 		return () => clearInterval(interval);
 	}, [beatsPerMinute]);
 
