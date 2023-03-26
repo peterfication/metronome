@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
 	const [beatsPerMinute, setBeatsPerMinute] = useState(60);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			console.log("tick");
+		}, 60 / beatsPerMinute * 1000);
+		return () => clearInterval(interval);
+	}, [beatsPerMinute]);
 
 	return (
 		<div className="App">
